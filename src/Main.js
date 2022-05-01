@@ -42,6 +42,7 @@ export default function Main() {
   }
   return (
     <div>
+        <h1>Todo List</h1>
       <Input onChange={(event) => setInput(event.target.value)} />
       <Button onClick={addToList}>Add to List</Button>
 
