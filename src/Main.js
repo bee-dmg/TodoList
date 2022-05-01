@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Input, Button } from "reactstrap";
+import {
+  Input,
+  Button,
+  CardBody,
+  Card,
+  CardTitle,
+  FormGroup,
+  InputGroup,
+
+  InputGroupText,
+} from "reactstrap";
 import uuidv4 from "react-uuid";
 export default function Main() {
   const [input, setInput] = useState();
@@ -39,28 +49,71 @@ export default function Main() {
       },
     ]);
     setEdit("");
+    setEditValue("");
   }
   return (
-    <div>
-        <h1>Todo List</h1>
-      <Input onChange={(event) => setInput(event.target.value)} />
-      <Button onClick={addToList}>Add to List</Button>
+    <div className="container">
+      <h1>Todo List</h1>
+      <div style={{ marginBottom: "13px" }}>
+        <Input onChange={(event) => setInput(event.target.value)} />{" "}
+      </div>
+      <div style={{ marginBottom: "13px" }}>
+        <Button color="primary" onClick={addToList}>
+          Add to List
+        </Button>
+      </div>
 
       {list.map((item) => {
         return (
           <div>
-            {edit === item.key ? (
-              <div>
-                <Input onChange={(event) => setEditValue(event.target.value)}>
-                  {item.task}
-                </Input>{" "}
-                <Button onClick={() => updateList(item.key)}>Done</Button>
-              </div>
-            ) : (
-              <div>{item.task}</div>
-            )}
-            <Button onClick={() => setEdit(item.key)}>Edit</Button>
-            <Button onClick={() => removeFromList(item.key)}>Delete</Button>
+            <Card
+              style={{ marginBottom: "13px" }}
+              body
+              color="secondary"
+              outline
+            >
+              <CardBody>
+                <FormGroup>
+                  {edit === item.key ? (
+                    <div>
+                      <InputGroup>
+                        <Input
+                          type="text"
+                          defaultValue={item.task}
+                          onChange={(event) => setEditValue(event.target.value)}
+                         
+                        />
+
+                
+                  
+
+                        <Button
+                          color="primary"
+                          onClick={() => updateList(item.key)}
+                        >
+                          Done
+                        </Button>
+                      </InputGroup>
+                    </div>
+                  ) : (
+                      <div>
+                    <CardTitle tag="h5">
+                      <div>{item.task}</div>
+                    </CardTitle>
+                    <Button color="primary" onClick={() => setEdit(item.key)}>
+                    Edit
+                    
+                  </Button>
+                  <Button onClick={() => removeFromList(item.key)}>
+                    Delete
+                  </Button>
+                  </div>
+                  )}
+                  
+                
+                </FormGroup>
+              </CardBody>
+            </Card>
           </div>
         );
       })}
