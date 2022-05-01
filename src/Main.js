@@ -7,8 +7,6 @@ import {
   CardTitle,
   FormGroup,
   InputGroup,
-
-  InputGroupText,
 } from "reactstrap";
 import uuidv4 from "react-uuid";
 export default function Main() {
